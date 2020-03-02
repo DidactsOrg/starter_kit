@@ -1,0 +1,443 @@
+\documentclass[]{article}
+\usepackage{color}
+\usepackage{fullpage}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp} % provides euro and other symbols
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{NSF I-DIRSE-IL Cheat Sheet\\
+        Notation, \LaTeX~Commands, Terminology, etc.}
+\author{Waheed Bajwa, Hagit Shatkay, and Christopher Tunnell}
+\date{Last updated: June 17, 2019}
+
+\begin{document}
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Physical Detector}
+
+\subsubsection{Terminology}
+
+\begin{itemize}
+\tightlist
+\item
+  Detector shall be consistently referred to as \emph{detector}.
+  \begin{itemize}
+  \tightlist
+  \item
+    Other alternatives include \emph{cylinder} and \emph{time projection chamber}, which can be mentioned in the beginning, but shall be rarely used after that.
+    \item XENON is collabration, xenon is element.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Notation}
+
+\begin{itemize}
+\tightlist
+\item
+  Detector as a cylinder:
+  \(\Omega := \{(x,y,z) \in \mathbb{R}^3: x^2 + y^2 \leq 10^6, -10^3 \leq z \leq 0\}\)
+  {[}units of mm{]}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    $z$ points up toward the sky and is normal to the surface of the Earth.
+  \item
+    $x$ and $y$ are in the plane of the sensors.
+  \item
+    Cylindrical coordinates would be parameterized by $\phi$ and $r$ instead of $x$ and $y$, where $r \in [0, 10^3] \subset \mathbb{R}$ is the distance in millimeters from the center of the detector and $\phi \in [0, 2\pi) \subset \mathbb{R}$ is the angle.
+  \end{itemize}
+\item
+  Top, bottom, and side of the detector:
+  \(\partial\Omega_T = \{(x,y,0) \in \Omega\}\) {[}top{]},
+  \(\partial\Omega_B := \{(x,y,-10^3) \in \Omega\}\) {[}bottom{]}, and
+  \(\partial\Omega_S := \{(x,y,z) \in \mathbb{R}^3: x^2 + y^2 = 10^6, -10^3 \leq z \leq 0 \}\) {[}side{]}
+\item
+  Any spatial location within the detector:
+  \(\vec{l} \in \Omega \subset \mathbb{R}^3\) {[}{\color{blue}\LaTeX~command is \verb|\vec{l}|}{]}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Physical Sensors Within the Detector}
+
+\subsubsection{Terminology}
+
+\begin{itemize}
+\tightlist
+\item
+  Sensors and sensor data data shall be consistently referred to as \emph{sensors} and \emph{sensor data}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Other alternatives include \emph{photosensors}, \emph{PMTs}, \emph{channels}, etc., which can be mentioned in the beginning, but shall be rarely used after that.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Notation}
+
+\begin{itemize}
+\tightlist
+\item
+  Number of sensors at the top and the bottom of the detector:
+  \(n := 248\)
+  {[}we are ignoring additional sensors that are outside (but adjacent to) the detector for the sake of the proposal{]}
+\item
+  Number of sensors on the top of the detector: \(n_T := 127\)
+\item
+  Number of sensors on the bottom of the detector: \(n_B := 121\)
+\item
+  Indexing of sensors: \(j = 0,\dots,n-1\), where \(0, \dots 126\) are the top ones
+\item
+  Spatial location of \(j\)-th sensor within the detector:
+  \(\vec{l}^s_j \in \partial\Omega_B \cup \partial\Omega_T\) {[}{\color{blue}\LaTeX~command is \verb|\vec{l}^s_j|}{]}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Raw Time-series Data Collected by the Sensors}
+
+\subsubsection{Terminology}
+
+\begin{itemize}
+\tightlist
+\item
+  Sensors record \emph{luminosity} incident upon them (physically, transported through photons).
+\item
+  Each sensor gives rise to a \emph{time-series data stream}, which shall always mean the \emph{digitized data} sampled at \(100\) MHz (one sample every \(10\) ns).
+\item
+  Data gathered by all sensors shall be collectively referred to as \emph{spatiotemporal data}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{Style:} We shall write \emph{spatiotemporal}, rather than \emph{spatio-temporal}.
+  \end{itemize}
+\item
+  High-throughput data is another important characteristics of our spatiotemporal data streams.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We shall refer to this characteristic as \emph{high-throughput data}, whose meaning shall be clearly explained in the beginning of the proposal.
+  \item
+    When used generally, this term will refer to any experiment or application that accumulates more than 1 petabyte per year of data.
+  \end{itemize}
+  \item Each sensor is connected to a channel.  The numbering of the sensor and channel are interchangable.
+\end{itemize}
+
+\subsubsection{Notation}
+
+\begin{itemize}
+\tightlist
+\item
+    The random variable associated with measurements of the $j$-th sensor (which is also the $j$-th channel to which the sensor is connected): $C_j \in \mathbb{R}_+$
+
+\item
+  Data collected by \(j\)-th sensor at (discrete) time \(t\):
+  \(c_j^t, t=0,1,\dots\), where \(t = 0\) denotes the first sample, \(t=1\) denotes the second sample, and so forth.
+\item
+  Description of sensor data: \(c_j^t = x_j^t + w_j^t\), with \(x_j^t = 0\) in the absence of any measurable luminosity and \(w_j^t\) is sensor noise
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Sensor noise seems to have a mixture model, with part of it being Poisson, but it also has impulsive (spikes) and sinusoidal characteristics.
+  \end{itemize}
+\item
+  Collection of data from all sensors at time \(t\), represented as a vector:
+  \(\vec{C}^{t} \in \mathbb{R}_+^n\) {[}{\color{blue}\LaTeX~command is \verb|\vec{C}^{t}|}{]}
+\item
+  Collection of data (non-Euclidean representation) from all sensors at time \(t\):
+  \(\mathcal{C}^t\) {[}{\color{blue}\LaTeX~command is \verb|\mathcal{C}^t|}{]}
+  \begin{itemize}
+  \tightlist
+  \item
+    Notice that linear algebra operations can be applied directly on the mathematical object \(\vec{C}^{t}\), which is taken as a vector in \(\mathbb{R}^n\), but not on the mathematical object \(\mathcal{C}^t\).
+  \item
+    The distinction between the two mathematical objects, while subtle, is important in relation to the distinction we want to make in terms of graph-based signal processing and graph-based machine learning.
+  \end{itemize}
+\item
+  Data collected from sensors from time \(t_i\) to time \(t_k\) (both forms):
+  \(\vec{{C}}^{t_i:t_k}\) {[}Euclidean{]} and
+  \(\mathcal{C}^{t_i:t_k}\) {[}non-Euclidean{]}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Physical Interactions Within the Detector}
+
+\subsubsection{Terminology}
+
+\begin{itemize}
+\tightlist
+\item
+  We shall refer to any particle interacting with any matter within the detector as a \emph{physical interaction}.
+\item
+  Each physical interaction gives rise to multiple incidences of \emph{measurable luminosity} at the top and the bottom sensors; each measureable luminous incidence at any sensor shall be referred to as a \emph{hit} {[}we may want to iterate over this language a couple of times for the final version; this only needs to be accurate for the purpose of this proposal{]}.
+\item
+  Hits recorded at multiple sensors within a short time of each other are collectively referred to as a \emph{peak}.
+\item
+  Multiple peaks recorded within the detector in a short time are collectively referred to as an \emph{event}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    All evidence for a physical interaction of a particle within the detector is therefore captured in terms of an \emph{event data frame}.
+  \item
+    In the absence of any background \emph{noise}, each event often results in two major spatiotemporal luminous signals (and thus two peaks), which shall be referred to as S1 (typically weaker and lasting for a much shorter duration) and S2 (typically stronger and having wider spread in time compared to S1) signals.
+  \item
+    Each event data frame typically corresponds to around \(300\) \(\mu\)s of data.
+  \item
+    There are typically 20 to 100 events recorded by the detector per second.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Notation: High Level}
+
+\begin{itemize}
+\tightlist
+\item
+  Particle type that interacts:
+  \(w \in W\)
+  {[}\(\w\) is a variable that can be a WIMP, a neutrino, etc., and \(W\) is all possible particles; unknown{]} \todo{I changed $\gamma$ to $w$ since $\gamma$ is the gamma ray particle.  Actually, every greek symbol is a particle.}
+
+\item
+  Interaction type:
+  \(\xi \in \Xi\)
+  {[}\(\xi\) is a variable that can, e.g., indicate elastic electronic recoils, elastic nuclear recoils, or other processes such as inelastic nuclear excitation, and \(\Xi\) is all possible interactions; unknown; {\color{blue}\LaTeX~commands are \verb|\xi| for $\xi$ and \verb|\Xi| for $\Xi$}{]}
+
+\item
+  Spatial location of particle interaction within the detector:
+  \(\vec{l} \in \Omega \subset \mathbb{R}^3\) {[}unknown{]}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    It is best to stick to the terminology of \emph{location} and \emph{localization}, rather than position.
+  \end{itemize}
+\item
+  Energy associated with the interaction: \(\mathcal{E} > 0\)
+  {[}units of keV; unknown; \LaTeX~command is \verb|\mathcal{E}|{]}
+\item
+  (Analog) time at which interaction took place: \(T \in \mathbb{R}_+\)
+  {[}units of ns; can be assumed known; while it can be absolute or relative, we treat it as the Unix Epoch time without loss of generality for computational and practical reasons (i.e., \(T=0\) is the start of 1970 in UTC){]}
+\item
+  Distinct interactions to be enumerated using an index like \(i\) on top of any of the above quantities: \(i = 1,2,\dots\), with \(i = 1\) being the first interaction recorded by the detector and so forth.
+\end{itemize}
+
+\subsubsection{Notation: Low Level (Events, Peaks, and Hits)}
+
+\begin{itemize}
+\tightlist
+\item
+  The \(i\)-th event: \(E_i\) {[}\(i\) can be dropped when referring to a particular event{]}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Start and end times of \(i\)-th event:
+    \(t_0^i\) and \(t_1^i\) {[}\(i\) can be dropped when referring to a particular event{]}
+  \item
+    Data collected from all sensors corresponding to \(i\)-th event:
+    \(\mathcal{C}^i := \mathcal{C}^{t_0^i:t_1^i}\) {[}non-Euclidean{]} and
+    \(\vec{C}^i := \vec{C}^{t_0^i:t_1^i}\)
+    {[}Euclidean{]} {[}\(i\) can be dropped when referring to a particular event{]}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Here, non-Euclidean means that the \(248\)-dimensional data at any time \(t\) (corresponding to all sensors) is treated as lying on a graph of \(248\) vertices, where Euclidean means that the data is treated as lying in \(\mathbb{R}^{248}\).
+    \end{itemize}
+  \end{itemize}
+\item
+  Peaks associated with the \(i\)-th event:
+  \(\pi_1^i, \dots, \pi_k^i\) {[}\(i\) can be dropped when referring to a particular event{]}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Start and end times of \(k\)-th peak within \(i\)-th event:
+    \(t_{0,k}^i\) and \(t_{1,k}^i\)
+    {[}\(i\) can be dropped when referring to a particular event{]}
+  \item
+    Data collected from all sensors corresponding to \(k\)-th peak within \(i\)-th event:
+    \(\mathcal{C}^{\pi_k^i} := \mathcal{C}^{t_{0,k}^i:t_{1,k}^i}\) {[}non-Euclidean{]} and
+    \(\vec{C}^{\pi_k^i} := \vec{C}^{t_{0,k}^i:t_{1,k}^i}\) {[}Euclidean{]}
+    {[}\(i\) can be dropped when referring to a particular event{]}
+  \end{itemize}
+\item
+  Hits associated with \(j\)-th sensor, \(k\)-th peak, and \(i\)-th event:
+  \(h_1^{j,\pi_k^i}, \dots, h_m^{j,\pi_k^i}\) {[}\(i\) can be dropped when referring to a particular event{]}
+\end{itemize}
+
+\subsubsection{Notation (Other Variables)}
+
+\begin{itemize}
+\tightlist
+\item
+  There are a number of other derived quantitative data available to us, which we cannot possibly discuss in the proposal. Any variable that is not explicitly defined will be lumped into auxiliary variables \(\theta\).
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Physical Forward Model}
+
+\subsubsection{Terminology}
+
+\begin{itemize}
+\tightlist
+\item
+  The term \emph{forward model} refers to the mathematical process that relates the physical process (in this case a particle interacting within the detector) to the output data (in this case, event spatiotemporal data corresponding to that interaction).
+
+  \begin{itemize}
+  \tightlist
+  \item
+    This forward model (up to a modeling error; see below) is known to us, but is too complicated to mathematically express in an analytical form. However, it can be generated precisely using numerical simulations.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Notation}
+
+\begin{itemize}
+\tightlist
+\item
+  The relationship between a particle interacting and the event data frame is expressed as follows:
+  \[(\vec{C}, t_0, t_1) := \mathcal{F}(\vec{l}, \mathcal{E}, T, \gamma, \xi) + \mathcal{W} + \Delta.\]
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Note that \(t_0\) and \(t_1\) depend on underlying physical properties of the interaction, and hence explicit mention in the above equation (but it can be dropped later).
+  \item
+    We shall sometimes refer to \(\mathcal{F}(\vec{l}, \mathcal{E}, T, \gamma, \xi)\) as the \emph{noiseless} luminous spatiotemporal data \(\vec{X}\) {[}{\color{blue}\LaTeX~notation: \verb|\vec{X}|}{]}.
+  \item
+    \(\mathcal{F}(\vec{l}, \mathcal{E}, T, \gamma, \xi)\) is completely known to us through numerical simulations (formed from an analytical expression, as noted above).
+  \item
+    Just like in all statistical modeling problems, we cannot model all aspects of the detector's hardware. We capture this model uncertainty in the object \(\Delta\) (of appropriate dimensionality) above.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Notice the difference between \(\mathcal{W}\), which only models sensor noise, and \(\Delta\), which models other uncertain aspects of our detector.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Training Data}
+
+\subsubsection{Terminology}
+
+\begin{itemize}
+\tightlist
+\item
+  In the case of supervised learning, labeled training data will be generated using numerical simulations.
+
+\item
+  In the case of unsupervised learning, unlabeled training data will be generated through both numerical simulations and real experiments.
+\end{itemize}
+
+\subsubsection{Notation}
+
+\begin{itemize}
+\tightlist
+\item
+  Supervised learning: We will have access to \(N\) labeled data (at the physical interaction/event level) generated through simulations, expressed as
+  \(\{\vec{C}^{i}, (\vec{l}^{\,i}, \mathcal{E}^i, T^i, \gamma^i, \xi^i)\}_{i=1}^N\)
+  {[}note that the start and end times of each event \(i\) are being implicitly encoded in the size of \(\vec{C}^i\); also, use {\color{blue}\LaTeX\ code \verb|\vec{l}^{\,i}| for \(\vec{l}^{\,i}\), as it appears as \(\vec{l}^i\) without the \verb|\,| space}{]}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We will use the shorthand notation \(\mathcal{L}^i := (\vec{l}^{\,i}, \mathcal{E}^i, T^i, \gamma^i, \xi^i)\) to capture the entire \emph{labeled tuple} \((\vec{l}^{\,i}, \mathcal{E}^i, T^i, \gamma^i, \xi^i)\) into one quantity {[}{\color{blue}\LaTeX\ command is \verb|\mathcal{L}|}{]}
+  \end{itemize}
+\item
+  Unsupervised learning: We will have access to \(N\) unlabeled data (at the event level) generated through both simulations and real experiments, expressed as \(\{\vec{C}^i\}_{i=1}^N\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    We will use \verb|\widehat{}| to distinguish between data and labels from numerical simulations versus real experiments; e.g., \((\vec{\widehat{C}}^i,\widehat{\mathcal{L}}^i)\) [data/labels from numerical simulations] versus \((\vec{\widehat{C}}^i,\mathcal{L}^i)\) [data from real experiments]
+  \end{itemize}
+\item
+  Experimental data has $(\vec{l}^{\,i}, \mathcal{E}^i, T^i, \gamma^i, \xi^i)$ unknown or partially known (e.g., just  $\mathcal{E}^i$), but we may know the statistical properties of the data. For example, the probability density function $f(\vec{l}^{\,i})$ may be known.  The probability  $\Pr [a \le X \le b] = \int_a^b f_X(x) \, dx$.  For example, if $f$ is normally distributed then $f(x) = \frac{1}{\sqrt{2\pi}}\; e^{-x^2/2}$.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Other Terminology}
+
+\begin{itemize}
+\tightlist
+\item
+  Our algorithms are both \emph{data science and machine learning algorithms}. In the interest of pithiness, we will sometimes only use the term \emph{data science}, which will subsume \emph{machine learning} within it {[}we shall say something like this explicitly in the proposal{]}.
+\item
+  Our approach can be called many different things and we should stick to \textbf{Science-aware data science and machine learning}.
+ 
+  
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Other Notation}
+
+\begin{itemize}
+\tightlist
+\item
+  Our sensor data have a graph structure, given by: \(\mathcal{G} = (\mathcal{V}, \mathbf{A})\), with \(\mathcal{V} = \{0,\dots,n-1\}\) representing the sensors and \(\mathbf{A}\) representing a weighted adjacency matrix.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Other Auxiliary Information}
+
+\begin{itemize}
+\tightlist
+\item
+  Digitizers generate 14-bit unsigned data (positive valued data).
+\item
+  Location reconstruction accuracy should be \(\pm 5\) mm or less; another important goal is very restrictive confidence intervals (methods with very small standard deviation).  Said differently, as this is a rare event search, it is better to have a resolution of 1 cm and no mismeasurement of 10 cm than a resolution of 1 mm with occasional 10 cm misreconstruction.  Current state of the art is a few mm to 1 cm, but these are hard to verify since people quote average L1 loss.
+\item
+  Energy reconstruction accuracy should be \(\pm 0.5\%\) or less (ideally smaller than this).  The current state of the art is 1.2\% from EXO.  NEXO aims for 0.5\%.  The statistical limit is 0.3\%.
+\end{itemize}
+
+\end{document}
