@@ -14,6 +14,9 @@ Start with the [Dark Matter direct detection wiki page](https://en.wikipedia.org
    * [First Results](http://astroparticle.rice.edu/teaching/1705.06655.pdf) - Short paper giving an overview of the analaysis, physicist audience.
    * [Detector](https://arxiv.org/abs/1708.07051) - Overview of the detector design.
   
+## DIDACTS
+
+Notation is available in the [notation subfolder](./notation) in TeX or PDF form.
  
 ## Running code
 
