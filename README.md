@@ -15,3 +15,13 @@ Start with the [Dark Matter direct detection wiki page](https://en.wikipedia.org
    * [Detector](https://arxiv.org/abs/1708.07051) - Overview of the detector design.
   
  
+## Running code
+
+Github locations of interest:
+
+  * [DIDACTS Organization](https://github.com/DidactsOrg/) - you are here
+  * [AxFoundation Organization](https://github.com/AxFoundation/)
+  * [XENON1T Organization](https://github.com/xenon1t/)
+  * [XENONnT Organization](https://github.com/xenonnt/)
+  
+Connect to our analysis machine at https://fried.rice.edu/jupyter.
