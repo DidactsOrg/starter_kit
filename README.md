@@ -8,6 +8,7 @@ Start with the [Dark Matter direct detection wiki page](https://en.wikipedia.org
 
  * [PhD Thesis, Jelle Aalbers](http://astroparticle.rice.edu/teaching/thesis_J_Aalbers.pdf) - Audience is physicists, but is a PhD thesis so a bit more generally written.  This contains an overview of the science, the XENON experiment, and details of the analysis.
  * [MS Thesis, Bart Pelssers](http://astroparticle.rice.edu/teaching/MScThesisPelssers.pdf) - Broader audience and more detail on just position reconstruction.
+ * [PhD Thesis, Bart Pelssers](http://su.diva-portal.org/smash/record.jsf?pid=diva2%3A1415753&dswid=6384) - The third chapter on position reconstruction explains the position reconstruction method used for XENON1T result.
  * XENON1T papers
    * [Data acquisition system](https://arxiv.org/abs/1906.00819) - Overview of how data is recorded
    * [Signal reconstruction](https://arxiv.org/abs/1906.04717) - Overview on what is done to data after it is recorded.
