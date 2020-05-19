@@ -14,6 +14,7 @@ Start with the [Dark Matter direct detection wiki page](https://en.wikipedia.org
    * [Signal reconstruction](https://arxiv.org/abs/1906.04717) - Overview on what is done to data after it is recorded.
    * [First Results](http://astroparticle.rice.edu/teaching/1705.06655.pdf) - Short paper giving an overview of the analaysis, physicist audience.
    * [Detector](https://arxiv.org/abs/1708.07051) - Overview of the detector design.
+   * [Data management](https://arxiv.org/pdf/1903.11441.pdf) - Overview of how we handle data
  * Electron emission backgrounds
    * [Investigation of background electron emission in the LUX detector](https://arxiv.org/pdf/2004.07791.pdf) - Similar detector, thorough study
   
